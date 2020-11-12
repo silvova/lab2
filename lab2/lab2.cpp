@@ -1,4 +1,4 @@
-#include <stdio.h>
+пїњ#include <stdio.h>
 #define diaps(a) ( ( ((a) >= 'a') && ((a) <= 'z')  ) || ( ((a) >= 'A') && ((a) <= 'Z') ) )
 
 int checkWord(char* s, char* getword) {
@@ -23,30 +23,49 @@ void swap(char* o, char* p) {
 }
 
 int main() {
-	char m1[1000] = {0};
+	char m1[1000] = { 0 };
 	char m2[10][100] = { {0},{0} };
 	int i = 0, n = 0, count = 0, x, y;
 	printf("Entered string:\n");
 	fgets(m1, 1000, stdin);
-	//разделение слов в двумерном массиве
 	while (m1[i] != '\n') {
-		if (!diaps(m1[i])) {
+		if (diaps(m1[i])) {
+			m2[count][n] = m1[i];
 			i++;
+			n++;
+			if (m1[i] == '\n') {
+				break;
+			}
+			else {
+				while (diaps(m1[i])) {
+					m2[count][n] = m1[i];
+					n++;
+					i++;
+					}
+				count++;
+				}
+			if (m1[i] == '\n') {
+				count--;
+				break;
+			}
+			i++;
+		}
+		else { 
 			while (!diaps(m1[i])) {
+				i++;
 				if (m1[i] == '\n') {
+					count--;
 					break;
 				}
-				i++;
 			}
-			count++;
-			n = 0;
-			
 		}
-		m2[count][n] = m1[i];
-		n++;
-		i++;
+		if (m1[i] == '\n') {
+			count--;
+			break;
+		}
+		n = 0;
 	}
-	//сортировка слов в двумерном массиве, при помощи разности
+
 	for (x = 0; x <= count; x++) {
 		for (y = 0; y <= count; y++) {
 			if (checkWord(m2[x], m2[y]) < 0) {
@@ -58,4 +77,4 @@ int main() {
 		printf("%s ", m2[a]);
 	}
 	return 0;
-	}
+}
