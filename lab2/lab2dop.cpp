@@ -1,4 +1,5 @@
-п»ї/*#include <stdio.h>
+//выводить слова в порядке увелечения гласных в них
+#include <stdio.h>
 #define diaps(e) ( ( ((e) >= 'a') && ((e) <= 'z')  ) || ( ((e) >= 'A') && ((e) <= 'Z') ) )
 
 int checkWord(char* s, char* getword) {
@@ -19,10 +20,21 @@ void swap(char* o, char* p) {
 	copyWord(p, o);
 	copyWord(o, tmp);
 }
+int checkLetter(char* getword) {
+	int s = 0;
+	char glas[] = "AEIOUYaeiouy";
+	for (int x = 0; getword[x] != '\0'; x++) {
+		for (int j = 0; glas[j] != '\0'; j++) {
+			if (getword[x] == glas[j]) { s++; }
+		}
+	}
+	return s;
+}
 
 int main() {
 	char m1[1000] = { 0 };
 	char m2[10][100] = { {0},{0} };
+	char glas[] = "AEIOUYaeiouy";
 	int i = 0, n = 0, count = 0;
 	printf("Entered string:\n");
 	fgets(m1, 1000, stdin);
@@ -39,16 +51,16 @@ int main() {
 					m2[count][n] = m1[i];
 					n++;
 					i++;
-					}
-				count++;
 				}
+				count++;
+			}
 			if (m1[i] == '\n') {
 				count--;
 				break;
 			}
 			i++;
 		}
-		else { 
+		else {
 			while (!diaps(m1[i])) {
 				i++;
 				if (m1[i] == '\n') {
@@ -66,13 +78,12 @@ int main() {
 
 	for (int x = 0; x <= count; x++) {
 		for (int y = 0; y <= count; y++) {
-			if (checkWord(m2[x], m2[y]) < 0) {
-				swap(m2[y], m2[x]);
+			if (checkLetter(m2[x]) < checkLetter(m2[y])) {
+				swap(m2[x], m2[y]);
 			}
 		}
 	}
 	for (int a = 0; a <= count; a++) {
 		printf("%s ", m2[a]);
 	}
-	return 0;
-}*/
+}
