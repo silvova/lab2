@@ -2,14 +2,6 @@
 #include <stdio.h>
 #define diaps(e) ( ( ((e) >= 'a') && ((e) <= 'z')  ) || ( ((e) >= 'A') && ((e) <= 'Z') ) )
 
-int checkWord(char* s, char* getword) {
-
-	while (*s != '\0' && *getword == *s) {
-		getword++;
-		s++;
-	}
-	return *s - *getword;
-}
 void copyWord(char* dst, char* src) {
 	while (*src != '\0' && (*dst++ = *src++)) {}
 	*dst = '\0';
